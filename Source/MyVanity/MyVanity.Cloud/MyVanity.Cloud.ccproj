@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MyVanity.WebContent\" />
+    <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MyVanity.WebContent\diagnostics.wadcfg">
@@ -54,6 +55,9 @@
       <RoleName>MyVanity.Web</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\myvanityProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

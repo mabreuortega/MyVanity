@@ -3,7 +3,7 @@
   <Role name="MyVanity.Web">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=xdevs;AccountKey=Um+L06BUI+GNGZpBspv1Hw69hd/IPaZnEu95mNN6R9Lk7pk4ZHxmaoklgGgFU4K93jO3XsK9gOXrDkkswFZA+w==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

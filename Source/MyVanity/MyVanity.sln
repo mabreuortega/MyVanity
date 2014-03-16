@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07E320
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Domain", "MyVanity.Domain\MyVanity.Domain.csproj", "{8B911593-3C8A-4650-875D-A609049B6BB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{D85783D9-5586-4C38-93CE-F31BFB786A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D85783D9-5586-4C38-93CE-F31BFB786A1A}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{D85783D9-5586-4C38-93CE-F31BFB786A1A}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{8B911593-3C8A-4650-875D-A609049B6BB9}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
