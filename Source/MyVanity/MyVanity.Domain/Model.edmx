@@ -14,6 +14,34 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Entities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Entities.User" />
+          <EntitySet Name="Messages" EntityType="Entities.Message" />
+          <AssociationSet Name="Outbox" Association="Entities.SentMessages">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="Inbox" Association="Entities.Inbox">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Messages" />
+          </AssociationSet>
+          <EntitySet Name="Procedures" EntityType="Entities.Procedure" />
+          <EntitySet Name="UserProcedures" EntityType="Entities.UserProcedure" />
+          <AssociationSet Name="PatientUserProcedure" Association="Entities.PatientUserProcedure">
+            <End Role="Patient" EntitySet="Users" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="ProcedureUserProcedure" Association="Entities.ProcedureUserProcedure">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <EntitySet Name="Documents" EntityType="Entities.Document" />
+          <AssociationSet Name="MessageAttachments" Association="Entities.MessageAttachments">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="MessageAttachment" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="PatientDocuments" Association="Entities.PatientDocuments">
+            <End Role="Patient" EntitySet="Users" />
+            <End Role="PatientDocument" EntitySet="Documents" />
+          </AssociationSet>
         </EntityContainer>
         <EnumType Name="UserType" UnderlyingType="Byte">
           <Member Name="Patient" />
@@ -25,12 +53,149 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="FirstName" Type="String" Nullable="true" />
-          <Property Name="LastName" Type="String" Nullable="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Outbox" Relationship="Entities.SentMessages" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Inbox" Relationship="Entities.Inbox" FromRole="User" ToRole="Notification" />
+          <Property Name="Type" Type="Entities.UserType" Nullable="false" />
         </EntityType>
         <EntityType Name="Admin" BaseType="Entities.User" />
         <EntityType Name="Agent" BaseType="Entities.User" />
-        <EntityType Name="Patient" BaseType="Entities.User" />
+        <EntityType Name="Patient" BaseType="Entities.User" >
+          <NavigationProperty Name="Procedures" Relationship="Entities.PatientUserProcedure" FromRole="Patient" ToRole="UserProcedure" />
+          <NavigationProperty Name="Documents" Relationship="Entities.PatientDocuments" FromRole="Patient" ToRole="PatientDocument" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="true" />
+          <Property Name="ToId" Type="String" Nullable="false" />
+          <Property Name="FromId" Type="String" Nullable="false" />
+          <NavigationProperty Name="From" Relationship="Entities.SentMessages" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="To" Relationship="Entities.Inbox" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="Attachments" Relationship="Entities.MessageAttachments" FromRole="Message" ToRole="MessageAttachment" />
+        </EntityType>
+        <Association Name="SentMessages">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Message" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Inbox">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Message" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Procedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Users" Relationship="Entities.ProcedureUserProcedure" FromRole="Procedure" ToRole="UserProcedure" />
+        </EntityType>
+        <EntityType Name="UserProcedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Patient" Relationship="Entities.PatientUserProcedure" FromRole="UserProcedure" ToRole="Patient" />
+          <Property Name="PatientId" Type="String" Nullable="false" />
+          <NavigationProperty Name="Procedure" Relationship="Entities.ProcedureUserProcedure" FromRole="UserProcedure" ToRole="Procedure" />
+          <Property Name="ProcedureId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="State" Type="Entities.ProcedureState" Nullable="false" />
+        </EntityType>
+        <Association Name="PatientUserProcedure">
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedure">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProcedureUserProcedure">
+          <End Type="Entities.Procedure" Role="Procedure" Multiplicity="1" />
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedure">
+              <PropertyRef Name="ProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ProcedureState">
+          <Member Name="New" />
+          <Member Name="Approved" />
+          <Member Name="Cancelled" />
+        </EnumType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Path" Type="String" Nullable="false" />
+          <Property Name="Censured" Type="String" Nullable="false" />
+          <Property Name="Type" Type="Entities.DocumentType" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MessageAttachment" BaseType="Entities.Document" >
+          <NavigationProperty Name="Message" Relationship="Entities.MessageAttachments" FromRole="MessageAttachment" ToRole="Message" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="MessageAttachments">
+          <End Type="Entities.Message" Role="Message" Multiplicity="1" />
+          <End Type="Entities.MessageAttachment" Role="MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PatientDocument" BaseType="Entities.Document" >
+          <NavigationProperty Name="Patient" Relationship="Entities.PatientDocuments" FromRole="PatientDocument" ToRole="Patient" />
+          <Property Name="PatientId" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="PatientDocuments">
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Entities.PatientDocument" Role="PatientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientDocument">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="DocumentType">
+          <Member Name="Attachment" />
+          <Member Name="Patient" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

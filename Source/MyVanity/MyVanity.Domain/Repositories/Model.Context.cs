@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using MyVanity.Domain.Entities;
-
 namespace MyVanity.Domain.Repositories
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using MyVanity.Domain.Entities;
+    
     
     public partial class ModelContainer : DbContext
     {
@@ -28,5 +28,9 @@ namespace MyVanity.Domain.Repositories
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Procedure> Procedures { get; set; }
+        public virtual DbSet<UserProcedure> UserProcedures { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
     }
 }

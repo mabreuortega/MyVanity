@@ -10,18 +10,11 @@
 namespace MyVanity.Domain.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Patient : User
+    public enum ProcedureState : int
     {
-        public Patient()
-        {
-            this.Procedures = new HashSet<UserProcedure>();
-            this.Documents = new HashSet<PatientDocument>();
-        }
-    
-    
-        public virtual ICollection<UserProcedure> Procedures { get; set; }
-        public virtual ICollection<PatientDocument> Documents { get; set; }
+        New = 0,
+        Approved = 1,
+        Cancelled = 2
     }
 }

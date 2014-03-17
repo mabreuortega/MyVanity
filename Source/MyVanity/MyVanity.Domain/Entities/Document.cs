@@ -12,20 +12,12 @@ namespace MyVanity.Domain.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Document
     {
-        public User()
-        {
-            this.Outbox = new HashSet<Message>();
-            this.Inbox = new HashSet<Message>();
-        }
-    
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public UserType Type { get; set; }
-    
-        public virtual ICollection<Message> Outbox { get; set; }
-        public virtual ICollection<Message> Inbox { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Censured { get; set; }
+        public DocumentType Type { get; set; }
     }
 }

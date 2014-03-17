@@ -12,20 +12,10 @@ namespace MyVanity.Domain.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class PatientDocument : Document
     {
-        public User()
-        {
-            this.Outbox = new HashSet<Message>();
-            this.Inbox = new HashSet<Message>();
-        }
+        public string PatientId { get; set; }
     
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public UserType Type { get; set; }
-    
-        public virtual ICollection<Message> Outbox { get; set; }
-        public virtual ICollection<Message> Inbox { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }
