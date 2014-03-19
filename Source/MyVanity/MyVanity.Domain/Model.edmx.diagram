@@ -16,15 +16,15 @@
         <EntityTypeShape EntityType="Entities.Message" Width="1.5" PointX="8.375" PointY="1.875" />
         <AssociationConnector Association="Entities.SentMessages" />
         <AssociationConnector Association="Entities.Inbox" />
-        <EntityTypeShape EntityType="Entities.Procedure" Width="1.5" PointX="2.125" PointY="6.875" />
-        <EntityTypeShape EntityType="Entities.UserProcedure" Width="1.5" PointX="4.125" PointY="6.875" />
+        <EntityTypeShape EntityType="Entities.Procedure" Width="1.5" PointX="2.125" PointY="7.125" />
+        <EntityTypeShape EntityType="Entities.UserProcedure" Width="1.5" PointX="4.125" PointY="7.125" />
         <AssociationConnector Association="Entities.PatientUserProcedure" />
         <AssociationConnector Association="Entities.ProcedureUserProcedure" />
         <EntityTypeShape EntityType="Entities.Document" Width="1.5" PointX="7.25" PointY="9.125" />
-        <EntityTypeShape EntityType="Entities.MessageAttachment" Width="1.5" PointX="8.25" PointY="6.875" />
+        <EntityTypeShape EntityType="Entities.MessageAttachment" Width="1.5" PointX="8.25" PointY="7.125" />
         <InheritanceConnector EntityType="Entities.MessageAttachment" />
         <AssociationConnector Association="Entities.MessageAttachments" />
-        <EntityTypeShape EntityType="Entities.PatientDocument" Width="1.5" PointX="6.25" PointY="6.875" />
+        <EntityTypeShape EntityType="Entities.PatientDocument" Width="1.5" PointX="6.25" PointY="7.125" />
         <InheritanceConnector EntityType="Entities.PatientDocument" />
         <AssociationConnector Association="Entities.PatientDocuments" />
       </Diagram>
