@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UserProcedure
+    public partial class Document
     {
         public int Id { get; set; }
-        public string PatientId { get; set; }
-        public int ProcedureId { get; set; }
-        public System.DateTime Date { get; set; }
-        public ProcedureState State { get; set; }
-    
-        public virtual Patient Patient { get; set; }
-        public virtual Procedure Procedure { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Censured { get; set; }
+        public DocumentType Type { get; set; }
     }
 }

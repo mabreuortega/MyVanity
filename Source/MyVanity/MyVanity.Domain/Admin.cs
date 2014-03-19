@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
+    using System.Collections.Generic;
     
-    public enum ProcedureState : int
+    public partial class Admin : User
     {
-        New = 0,
-        Approved = 1,
-        Cancelled = 2
     }
 }

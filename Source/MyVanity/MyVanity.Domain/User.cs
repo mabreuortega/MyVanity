@@ -7,20 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Procedure
+    public partial class User
     {
-        public Procedure()
+        public User()
         {
-            this.Users = new HashSet<UserProcedure>();
+            this.Outbox = new HashSet<Message>();
+            this.Inbox = new HashSet<Message>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public UserType Type { get; set; }
     
-        public virtual ICollection<UserProcedure> Users { get; set; }
+        public virtual ICollection<Message> Outbox { get; set; }
+        public virtual ICollection<Message> Inbox { get; set; }
     }
 }

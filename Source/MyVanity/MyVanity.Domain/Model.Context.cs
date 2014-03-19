@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Repositories
+namespace MyVanity.Domain
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using MyVanity.Domain.Entities;
-    
     
     public partial class ModelContainer : DbContext
     {

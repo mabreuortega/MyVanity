@@ -27,6 +27,8 @@
         <EntityTypeShape EntityType="Entities.PatientDocument" Width="1.5" PointX="6.25" PointY="7.125" />
         <InheritanceConnector EntityType="Entities.PatientDocument" />
         <AssociationConnector Association="Entities.PatientDocuments" />
+        <EntityTypeShape EntityType="Entities.SharedDocument" Width="1.5" PointX="10.5" PointY="7.125" />
+        <InheritanceConnector EntityType="Entities.SharedDocument" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

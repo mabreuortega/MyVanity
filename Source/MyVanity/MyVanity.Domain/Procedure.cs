@@ -7,26 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class Procedure
     {
-        public Message()
+        public Procedure()
         {
-            this.Attachments = new HashSet<MessageAttachment>();
+            this.Users = new HashSet<UserProcedure>();
         }
     
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public string ToId { get; set; }
-        public string FromId { get; set; }
     
-        public virtual User From { get; set; }
-        public virtual User To { get; set; }
-        public virtual ICollection<MessageAttachment> Attachments { get; set; }
+        public virtual ICollection<UserProcedure> Users { get; set; }
     }
 }

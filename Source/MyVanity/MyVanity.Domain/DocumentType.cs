@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PatientDocument : Document
+    public enum DocumentType : int
     {
-        public string PatientId { get; set; }
-    
-        public virtual Patient Patient { get; set; }
+        Attachment = 0,
+        Patient = 1,
+        Shared = 2
     }
 }

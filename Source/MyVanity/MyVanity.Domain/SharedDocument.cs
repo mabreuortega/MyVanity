@@ -7,13 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
+    using System.Collections.Generic;
     
-    public enum DocumentType : int
+    public partial class SharedDocument : Document
     {
-        Attachment = 0,
-        Patient = 1
     }
 }

@@ -4,11 +4,308 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="ModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Entities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EntitiesStoreContainer">
+    <EntitySet Name="Users" EntityType="Entities.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="Entities.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Procedures" EntityType="Entities.Store.Procedures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProcedures" EntityType="Entities.Store.UserProcedures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents" EntityType="Entities.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Patient" EntityType="Entities.Store.Users_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_MessageAttachment" EntityType="Entities.Store.Documents_MessageAttachment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_PatientDocument" EntityType="Entities.Store.Documents_PatientDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Admin" EntityType="Entities.Store.Users_Admin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Agent" EntityType="Entities.Store.Users_Agent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_SharedDocument" EntityType="Entities.Store.Documents_SharedDocument" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Outbox" Association="Entities.Store.SentMessages">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="Inbox" Association="Entities.Store.Inbox">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="PatientUserProcedure" Association="Entities.Store.PatientUserProcedure">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+    </AssociationSet>
+    <AssociationSet Name="ProcedureUserProcedure" Association="Entities.Store.ProcedureUserProcedure">
+      <End Role="Procedure" EntitySet="Procedures" />
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+    </AssociationSet>
+    <AssociationSet Name="MessageAttachments" Association="Entities.Store.MessageAttachments">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageAttachment" EntitySet="Documents_MessageAttachment" />
+    </AssociationSet>
+    <AssociationSet Name="PatientDocuments" Association="Entities.Store.PatientDocuments">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="PatientDocument" EntitySet="Documents_PatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_User" Association="Entities.Store.FK_Patient_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Patient" EntitySet="Users_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageAttachment_inherits_Document" Association="Entities.Store.FK_MessageAttachment_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="MessageAttachment" EntitySet="Documents_MessageAttachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDocument_inherits_Document" Association="Entities.Store.FK_PatientDocument_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="PatientDocument" EntitySet="Documents_PatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_inherits_User" Association="Entities.Store.FK_Admin_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Admin" EntitySet="Users_Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_inherits_User" Association="Entities.Store.FK_Agent_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Agent" EntitySet="Users_Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SharedDocument_inherits_Document" Association="Entities.Store.FK_SharedDocument_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="SharedDocument" EntitySet="Documents_SharedDocument" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ToId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FromId" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Procedures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProcedures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProcedureId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="State" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Censured" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_MessageAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="MessageId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_PatientDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PatientId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Agent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_SharedDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SentMessages">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1" />
+    <End Role="Notification" Type="Entities.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="FromId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Inbox">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1" />
+    <End Role="Notification" Type="Entities.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="ToId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientUserProcedure">
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="1" />
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedure">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProcedureUserProcedure">
+    <End Role="Procedure" Type="Entities.Store.Procedures" Multiplicity="1" />
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Procedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedure">
+        <PropertyRef Name="ProcedureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MessageAttachments">
+    <End Role="Message" Type="Entities.Store.Messages" Multiplicity="1" />
+    <End Role="MessageAttachment" Type="Entities.Store.Documents_MessageAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageAttachment">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientDocuments">
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="1" />
+    <End Role="PatientDocument" Type="Entities.Store.Documents_PatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageAttachment_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MessageAttachment" Type="Entities.Store.Documents_MessageAttachment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageAttachment">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDocument_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDocument" Type="Entities.Store.Documents_PatientDocument" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Admin" Type="Entities.Store.Users_Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Agent" Type="Entities.Store.Users_Agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SharedDocument_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SharedDocument" Type="Entities.Store.Documents_SharedDocument" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SharedDocument">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Entities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -195,18 +492,99 @@
         <EnumType Name="DocumentType">
           <Member Name="Attachment" />
           <Member Name="Patient" />
+          <Member Name="Shared" />
         </EnumType>
+        <EntityType Name="SharedDocument" BaseType="Entities.Document" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Model" />
-        <Alias Key="Target" Value="Model.Store" />
-        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Patient)">
+        <MappingFragment StoreEntitySet="Users_Patient">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Admin)">
+        <MappingFragment StoreEntitySet="Users_Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Agent)">
+        <MappingFragment StoreEntitySet="Users_Agent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Message)">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="ToId" ColumnName="ToId" />
+          <ScalarProperty Name="FromId" ColumnName="FromId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Procedures">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Procedure)">
+        <MappingFragment StoreEntitySet="Procedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProcedures">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.UserProcedure)">
+        <MappingFragment StoreEntitySet="UserProcedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="ProcedureId" ColumnName="ProcedureId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Document)">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Censured" ColumnName="Censured" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.MessageAttachment)">
+        <MappingFragment StoreEntitySet="Documents_MessageAttachment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.PatientDocument)">
+        <MappingFragment StoreEntitySet="Documents_PatientDocument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.SharedDocument)">
+        <MappingFragment StoreEntitySet="Documents_SharedDocument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -220,6 +598,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

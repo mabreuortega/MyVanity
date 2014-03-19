@@ -7,17 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Document
+    public enum UserType : byte
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public string Censured { get; set; }
-        public DocumentType Type { get; set; }
+        Patient = 0,
+        Agent = 1,
+        Admin = 2
     }
 }

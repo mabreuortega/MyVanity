@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class MessageAttachment : Document
+    public enum ProcedureState : int
     {
-        public int MessageId { get; set; }
-    
-        public virtual Message Message { get; set; }
+        New = 0,
+        Approved = 1,
+        Cancelled = 2
     }
 }

@@ -7,12 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyVanity.Domain.Entities
+namespace MyVanity.Domain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Agent : User
+    public partial class Patient : User
     {
+        public Patient()
+        {
+            this.Procedures = new HashSet<UserProcedure>();
+            this.Documents = new HashSet<PatientDocument>();
+        }
+    
+    
+        public virtual ICollection<UserProcedure> Procedures { get; set; }
+        public virtual ICollection<PatientDocument> Documents { get; set; }
     }
 }
