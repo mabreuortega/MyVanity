@@ -14,13 +14,13 @@ namespace MyVanity.Web.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            var manager = new DocumentManager();
-            var document = new PatientDocument {Id = 1, Name = "XXX.txt", Type = DocumentType.Patient};
+            //var manager = new DocumentManager();
+            //var document = new PatientDocument {Id = 1, Name = "XXX.txt", Type = DocumentType.Patient};
 
-            await manager.SaveAsync(document, Encoding.UTF8.GetBytes("Hello Blob Storage!!!"));
+            //await manager.SaveAsync(document, Encoding.UTF8.GetBytes("Hello Blob Storage!!!"));
 
-            var content = await manager.GetAsync(document);
-            System.IO.File.WriteAllBytes(@"D:\Temp.jpg", content);
+            //var content = await manager.GetAsync(document);
+            //System.IO.File.WriteAllBytes(@"D:\Temp.jpg", content);
 
             return View();
         }
