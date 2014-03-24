@@ -10,11 +10,18 @@
 namespace MyVanity.Domain
 {
     using System;
+    using System.Collections.Generic;
     
-    public enum DocumentType : int
+    public partial class ProcedureCategory
     {
-        Attachment = 0,
-        Patient = 1,
-        Shared = 2
+        public ProcedureCategory()
+        {
+            this.Procedures = new HashSet<Procedure>();
+        }
+    
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<Procedure> Procedures { get; set; }
     }
 }

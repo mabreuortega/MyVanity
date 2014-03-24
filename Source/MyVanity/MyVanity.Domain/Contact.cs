@@ -12,21 +12,26 @@ namespace MyVanity.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class Contact
     {
-        public Message()
+        public Contact()
         {
-            this.Attachments = new HashSet<MessageAttachment>();
+            this.Address = new Address();
+            this.Phone = new Phone();
+            this.ZipCode = new ZipCode();
+            this.Social = new Social();
+            this.Address2 = new Address();
         }
     
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public int ToId { get; set; }
-        public int FromId { get; set; }
+        public int StateId { get; set; }
     
-        public virtual User From { get; set; }
-        public virtual User To { get; set; }
-        public virtual ICollection<MessageAttachment> Attachments { get; set; }
+        public Address Address { get; set; }
+        public Phone Phone { get; set; }
+        public ZipCode ZipCode { get; set; }
+        public Social Social { get; set; }
+        public Address Address2 { get; set; }
+    
+        public virtual State State { get; set; }
     }
 }

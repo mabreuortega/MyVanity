@@ -20,8 +20,11 @@ namespace MyVanity.Domain
             this.Documents = new HashSet<PatientDocument>();
         }
     
+        public string Number { get; set; }
+        public int ContactId { get; set; }
     
         public virtual ICollection<UserProcedure> Procedures { get; set; }
         public virtual ICollection<PatientDocument> Documents { get; set; }
+        public virtual Contact Contact { get; set; }
     }
 }

@@ -12,12 +12,18 @@ namespace MyVanity.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Document
+    public abstract partial class Document
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public string Censured { get; set; }
-        public DocumentType Type { get; set; }
+        public int CategoryId { get; set; }
+        public Nullable<int> SubcategoryId { get; set; }
+        public ContentType ContentType { get; set; }
+        public string Description { get; set; }
+    
+        public virtual DocumentCategory Category { get; set; }
+        public virtual DocumentSubcategory Subcategory { get; set; }
     }
 }

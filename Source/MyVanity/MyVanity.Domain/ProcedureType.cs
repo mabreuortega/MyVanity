@@ -12,21 +12,16 @@ namespace MyVanity.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class ProcedureType
     {
-        public Message()
+        public ProcedureType()
         {
-            this.Attachments = new HashSet<MessageAttachment>();
+            this.Procedures = new HashSet<Procedure>();
         }
     
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public int ToId { get; set; }
-        public int FromId { get; set; }
+        public string Name { get; set; }
     
-        public virtual User From { get; set; }
-        public virtual User To { get; set; }
-        public virtual ICollection<MessageAttachment> Attachments { get; set; }
+        public virtual ICollection<Procedure> Procedures { get; set; }
     }
 }

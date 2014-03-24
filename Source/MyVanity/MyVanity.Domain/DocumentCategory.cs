@@ -12,21 +12,18 @@ namespace MyVanity.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class DocumentCategory
     {
-        public Message()
+        public DocumentCategory()
         {
-            this.Attachments = new HashSet<MessageAttachment>();
+            this.Subcategories = new HashSet<DocumentSubcategory>();
+            this.Documents = new HashSet<Document>();
         }
     
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public int ToId { get; set; }
-        public int FromId { get; set; }
+        public string Name { get; set; }
     
-        public virtual User From { get; set; }
-        public virtual User To { get; set; }
-        public virtual ICollection<MessageAttachment> Attachments { get; set; }
+        public virtual ICollection<DocumentSubcategory> Subcategories { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

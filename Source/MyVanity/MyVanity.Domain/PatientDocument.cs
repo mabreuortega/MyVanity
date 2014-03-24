@@ -14,7 +14,7 @@ namespace MyVanity.Domain
     
     public partial class PatientDocument : Document
     {
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
     
         public virtual Patient Patient { get; set; }
     }

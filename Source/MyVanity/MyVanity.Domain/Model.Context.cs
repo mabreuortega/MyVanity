@@ -30,5 +30,12 @@ namespace MyVanity.Domain
         public virtual DbSet<Procedure> Procedures { get; set; }
         public virtual DbSet<UserProcedure> UserProcedures { get; set; }
         public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<ProcedureCategory> ProcedureCategories { get; set; }
+        public virtual DbSet<DocumentCategory> DocumentCategories { get; set; }
+        public virtual DbSet<DocumentSubcategory> DocumentSubcategories { get; set; }
+        public virtual DbSet<ProcedureType> ProcedureTypes { get; set; }
     }
 }

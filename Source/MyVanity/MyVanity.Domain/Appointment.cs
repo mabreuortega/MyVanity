@@ -10,11 +10,15 @@
 namespace MyVanity.Domain
 {
     using System;
+    using System.Collections.Generic;
     
-    public enum UserType : byte
+    public partial class Appointment
     {
-        Patient = 0,
-        Agent = 1,
-        Admin = 2
+        public int UserProcedureId { get; set; }
+        public System.DateTime Date { get; set; }
+        public AppointmentStatus Status { get; set; }
+        public string Description { get; set; }
+    
+        public virtual UserProcedure Procedure { get; set; }
     }
 }

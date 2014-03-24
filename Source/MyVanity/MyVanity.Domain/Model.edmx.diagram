@@ -4,31 +4,51 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae62b73a93fe4243933868b9cf7bb016" Name="Diagram1" >
+      <Diagram DiagramId="ae62b73a93fe4243933868b9cf7bb016" Name="All" >
         <EntityTypeShape EntityType="Entities.User" Width="1.5" PointX="3.5" PointY="1.875" />
         <EntityTypeShape EntityType="Entities.Admin" Width="1.5" PointX="0.875" PointY="5.125" />
         <InheritanceConnector EntityType="Entities.Admin" />
-        <EntityTypeShape EntityType="Entities.Agent" Width="1.5" PointX="3.5" PointY="5.125" />
+        <EntityTypeShape EntityType="Entities.Agent" Width="1.5" PointX="3.375" PointY="5.125" />
         <InheritanceConnector EntityType="Entities.Agent" />
         <EntityTypeShape EntityType="Entities.Patient" Width="1.5" PointX="5.875" PointY="5.125" />
         <InheritanceConnector EntityType="Entities.Patient" ManuallyRouted="false" >
         </InheritanceConnector>
-        <EntityTypeShape EntityType="Entities.Message" Width="1.5" PointX="8.375" PointY="1.875" />
+        <EntityTypeShape EntityType="Entities.Message" Width="1.5" PointX="14.5" PointY="1.875" />
         <AssociationConnector Association="Entities.SentMessages" />
         <AssociationConnector Association="Entities.Inbox" />
-        <EntityTypeShape EntityType="Entities.Procedure" Width="1.5" PointX="2.125" PointY="7.125" />
-        <EntityTypeShape EntityType="Entities.UserProcedure" Width="1.5" PointX="4.125" PointY="7.125" />
+        <EntityTypeShape EntityType="Entities.Procedure" Width="1.5" PointX="0.875" PointY="8.75" />
+        <EntityTypeShape EntityType="Entities.UserProcedure" Width="1.5" PointX="3.625" PointY="8.75" />
         <AssociationConnector Association="Entities.PatientUserProcedure" />
         <AssociationConnector Association="Entities.ProcedureUserProcedure" />
-        <EntityTypeShape EntityType="Entities.Document" Width="1.5" PointX="7.25" PointY="9.125" />
-        <EntityTypeShape EntityType="Entities.MessageAttachment" Width="1.5" PointX="8.25" PointY="7.125" />
+        <EntityTypeShape EntityType="Entities.Document" Width="1.5" PointX="13.125" PointY="9.25" />
+        <EntityTypeShape EntityType="Entities.MessageAttachment" Width="1.5" PointX="13.125" PointY="6.75" />
         <InheritanceConnector EntityType="Entities.MessageAttachment" />
         <AssociationConnector Association="Entities.MessageAttachments" />
-        <EntityTypeShape EntityType="Entities.PatientDocument" Width="1.5" PointX="6.25" PointY="7.125" />
+        <EntityTypeShape EntityType="Entities.PatientDocument" Width="1.5" PointX="10.5" PointY="6.75" />
         <InheritanceConnector EntityType="Entities.PatientDocument" />
         <AssociationConnector Association="Entities.PatientDocuments" />
-        <EntityTypeShape EntityType="Entities.SharedDocument" Width="1.5" PointX="10.5" PointY="7.125" />
-        <InheritanceConnector EntityType="Entities.SharedDocument" />
+        <EntityTypeShape EntityType="Entities.SharedDocument" Width="1.5" PointX="15.625" PointY="6.75" />
+        <InheritanceConnector EntityType="Entities.SharedDocument" ManuallyRouted="true" >
+          <ConnectorPoint PointX="13.875" PointY="9.25" />
+          <ConnectorPoint PointX="13.875" PointY="8.5572916666666661" />
+          <ConnectorPoint PointX="16.375" PointY="8.5572916666666661" />
+          <ConnectorPoint PointX="16.375" PointY="7.768779296875" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="Entities.Appointment" Width="1.5" PointX="3.625" PointY="12" />
+        <AssociationConnector Association="Entities.UserProcedureAppointment" />
+        <EntityTypeShape EntityType="Entities.Contact" Width="1.5" PointX="8.375" PointY="3.875" />
+        <EntityTypeShape EntityType="Entities.State" Width="1.5" PointX="10.625" PointY="3.875" />
+        <AssociationConnector Association="Entities.StateContact" />
+        <AssociationConnector Association="Entities.ContactPatient" />
+        <EntityTypeShape EntityType="Entities.ProcedureCategory" Width="1.5" PointX="0.875" PointY="12" />
+        <AssociationConnector Association="Entities.ProcedureCategoryProcedure" />
+        <EntityTypeShape EntityType="Entities.DocumentCategory" Width="1.5" PointX="15.625" PointY="9.25" />
+        <EntityTypeShape EntityType="Entities.DocumentSubcategory" Width="1.5" PointX="15.625" PointY="11.75" />
+        <AssociationConnector Association="Entities.DocumentCategoryDocumentSubcategory" />
+        <AssociationConnector Association="Entities.DocumentCategoryDocument" />
+        <AssociationConnector Association="Entities.DocumentSubcategoryDocument" />
+        <EntityTypeShape EntityType="Entities.ProcedureType" Width="1.5" PointX="0.875" PointY="6.5" />
+        <AssociationConnector Association="Entities.ProcedureTypeProcedure" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

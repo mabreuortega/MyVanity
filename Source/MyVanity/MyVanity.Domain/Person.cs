@@ -10,22 +10,15 @@
 namespace MyVanity.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public abstract partial class User
+    public partial class Person
     {
-        public User()
-        {
-            this.Outbox = new HashSet<Message>();
-            this.Inbox = new HashSet<Message>();
-            this.Profile = new Person();
-        }
-    
-        public int Id { get; set; }
-    
-        public Person Profile { get; set; }
-    
-        public virtual ICollection<Message> Outbox { get; set; }
-        public virtual ICollection<Message> Inbox { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+        public Sex Sex { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string SSN { get; set; }
+        public string License { get; set; }
     }
 }

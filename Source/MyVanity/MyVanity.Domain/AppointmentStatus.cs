@@ -10,22 +10,16 @@
 namespace MyVanity.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public abstract partial class User
+    public enum AppointmentStatus : int
     {
-        public User()
-        {
-            this.Outbox = new HashSet<Message>();
-            this.Inbox = new HashSet<Message>();
-            this.Profile = new Person();
-        }
-    
-        public int Id { get; set; }
-    
-        public Person Profile { get; set; }
-    
-        public virtual ICollection<Message> Outbox { get; set; }
-        public virtual ICollection<Message> Inbox { get; set; }
+        Scheduled = 1,
+        Canceled = 2,
+        Confirmed = 3,
+        CheckedIn = 4,
+        Ready = 5,
+        InProgress = 6,
+        Complete = 7,
+        Hidden = 8
     }
 }

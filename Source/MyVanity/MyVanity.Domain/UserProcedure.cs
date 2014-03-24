@@ -14,13 +14,19 @@ namespace MyVanity.Domain
     
     public partial class UserProcedure
     {
+        public UserProcedure()
+        {
+            this.Appointments = new HashSet<Appointment>();
+        }
+    
         public int Id { get; set; }
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         public int ProcedureId { get; set; }
         public System.DateTime Date { get; set; }
         public ProcedureState State { get; set; }
     
         public virtual Patient Patient { get; set; }
         public virtual Procedure Procedure { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
