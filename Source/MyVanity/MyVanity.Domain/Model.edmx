@@ -110,13 +110,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Profile_FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Profile_LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Profile_MiddleName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Profile_Sex" Type="int" Nullable="false" />
-    <Property Name="Profile_DOB" Type="datetime" Nullable="true" />
-    <Property Name="Profile_SSN" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Profile_License" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="Messages">
     <Key>
@@ -179,8 +173,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Address_Street" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Address_City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_Street" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Address_City" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="Phone_Home" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Phone_Work" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Phone_Mobile" Type="nvarchar(max)" Nullable="true" />
@@ -190,8 +184,8 @@
     <Property Name="Social_Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Social_Facebook" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Social_Twitter" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Address2_Street" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Address2_City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address2_Street" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Address2_City" Type="nvarchar" Nullable="true" MaxLength="100" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -236,6 +230,13 @@
     </Key>
     <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ContactId" Type="int" Nullable="false" />
+    <Property Name="Profile_FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Profile_Sex" Type="int" Nullable="false" />
+    <Property Name="Profile_DOB" Type="datetime" Nullable="true" />
+    <Property Name="Profile_SSN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_License" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Documents_MessageAttachment">
@@ -262,6 +263,13 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Profile_FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Profile_Sex" Type="int" Nullable="false" />
+    <Property Name="Profile_DOB" Type="datetime" Nullable="true" />
+    <Property Name="Profile_SSN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_License" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Documents_SharedDocument">
@@ -605,16 +613,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Outbox" Relationship="Entities.SentMessages" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="Inbox" Relationship="Entities.Inbox" FromRole="User" ToRole="Notification" />
-          <Property Name="Profile" Type="Entities.Person" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Admin" BaseType="Entities.User" />
-        <EntityType Name="Agent" BaseType="Entities.User" />
+        <EntityType Name="Agent" BaseType="Entities.User" >
+          <Property Name="Profile" Type="Entities.Person" Nullable="false" />
+        </EntityType>
         <EntityType Name="Patient" BaseType="Entities.User" >
           <NavigationProperty Name="Procedures" Relationship="Entities.PatientUserProcedure" FromRole="Patient" ToRole="UserProcedure" />
           <NavigationProperty Name="Documents" Relationship="Entities.PatientDocuments" FromRole="Patient" ToRole="PatientDocument" />
           <Property Name="Number" Type="String" Nullable="false" />
           <NavigationProperty Name="Contact" Relationship="Entities.ContactPatient" FromRole="Patient" ToRole="Contact" />
           <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="Profile" Type="Entities.Person" Nullable="false" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -810,8 +821,8 @@
           <Property Type="String" Name="Mobile" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Address" >
-          <Property Type="String" Name="Street" Nullable="true" />
-          <Property Type="String" Name="City" Nullable="true" />
+          <Property Type="String" Name="Street" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="ZipCode" >
           <Property Type="String" Name="Number" Nullable="true" />
@@ -987,6 +998,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(Entities.User)">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Patient)">
+        <MappingFragment StoreEntitySet="Users_Patient">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
           <ComplexProperty Name="Profile" TypeName="Entities.Person">
             <ScalarProperty Name="FirstName" ColumnName="Profile_FirstName" />
             <ScalarProperty Name="LastName" ColumnName="Profile_LastName" />
@@ -998,13 +1017,6 @@
           </ComplexProperty>
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Entities.Patient)">
-        <MappingFragment StoreEntitySet="Users_Patient">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-        </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Entities.Admin)">
         <MappingFragment StoreEntitySet="Users_Admin">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1013,6 +1025,15 @@
       <EntityTypeMapping TypeName="IsTypeOf(Entities.Agent)">
         <MappingFragment StoreEntitySet="Users_Agent">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ComplexProperty Name="Profile" TypeName="Entities.Person">
+            <ScalarProperty Name="FirstName" ColumnName="Profile_FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="Profile_LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="Profile_MiddleName" />
+            <ScalarProperty Name="Sex" ColumnName="Profile_Sex" />
+            <ScalarProperty Name="DOB" ColumnName="Profile_DOB" />
+            <ScalarProperty Name="SSN" ColumnName="Profile_SSN" />
+            <ScalarProperty Name="License" ColumnName="Profile_License" />
+          </ComplexProperty>
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

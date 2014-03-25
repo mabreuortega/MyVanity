@@ -18,10 +18,13 @@ namespace MyVanity.Domain
         {
             this.Procedures = new HashSet<UserProcedure>();
             this.Documents = new HashSet<PatientDocument>();
+            this.Profile = new Person();
         }
     
         public string Number { get; set; }
         public int ContactId { get; set; }
+    
+        public Person Profile { get; set; }
     
         public virtual ICollection<UserProcedure> Procedures { get; set; }
         public virtual ICollection<PatientDocument> Documents { get; set; }

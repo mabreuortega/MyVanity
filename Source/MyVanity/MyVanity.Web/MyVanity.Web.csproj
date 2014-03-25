@@ -56,6 +56,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -154,9 +158,6 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -190,12 +191,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppInitializer.cs" />
+    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Autofac\MvcShell.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\OnePerRequestFilterProvider.cs" />
+    <Compile Include="Filters\TransactionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +273,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyVanity.Common\MyVanity.Common.csproj">
+      <Project>{d91d1192-306b-49f3-912f-32888bd2cc01}</Project>
+      <Name>MyVanity.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyVanity.Domain\MyVanity.Domain.csproj">
       <Project>{8b911593-3c8a-4650-875d-a609049b6bb9}</Project>
       <Name>MyVanity.Domain</Name>
@@ -275,6 +284,10 @@
     <ProjectReference Include="..\MyVanity.Services\MyVanity.Services.csproj">
       <Project>{5d54601b-32fd-4215-b5b2-bbe4b770a59d}</Project>
       <Name>MyVanity.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVanity.Views\MyVanity.Views.csproj">
+      <Project>{16d0b619-7db8-4840-8d18-4ffac8b612d3}</Project>
+      <Name>MyVanity.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

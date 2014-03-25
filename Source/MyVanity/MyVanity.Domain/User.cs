@@ -18,12 +18,10 @@ namespace MyVanity.Domain
         {
             this.Outbox = new HashSet<Message>();
             this.Inbox = new HashSet<Message>();
-            this.Profile = new Person();
         }
     
         public int Id { get; set; }
-    
-        public Person Profile { get; set; }
+        public string UserName { get; set; }
     
         public virtual ICollection<Message> Outbox { get; set; }
         public virtual ICollection<Message> Inbox { get; set; }

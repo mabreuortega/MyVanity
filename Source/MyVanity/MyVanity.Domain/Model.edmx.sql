@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/24/2014 12:50:26
+-- Date Created: 03/25/2014 03:43:55
 -- Generated from EDMX file: C:\Users\Miguel\My Projects\MyVanity\Repository\Source\MyVanity\MyVanity.Domain\Model.edmx
 -- --------------------------------------------------
 
@@ -144,13 +144,7 @@ GO
 -- Creating table 'Users'
 CREATE TABLE [dbo].[Users] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Profile_FirstName] nvarchar(max)  NOT NULL,
-    [Profile_LastName] nvarchar(max)  NOT NULL,
-    [Profile_MiddleName] nvarchar(max)  NULL,
-    [Profile_Sex] int  NOT NULL,
-    [Profile_DOB] datetime  NULL,
-    [Profile_SSN] nvarchar(max)  NOT NULL,
-    [Profile_License] nvarchar(max)  NULL
+    [UserName] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -212,8 +206,8 @@ GO
 -- Creating table 'Contacts'
 CREATE TABLE [dbo].[Contacts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Address_Street] nvarchar(max)  NULL,
-    [Address_City] nvarchar(max)  NULL,
+    [Address_Street] nvarchar(255)  NULL,
+    [Address_City] nvarchar(100)  NULL,
     [Phone_Home] nvarchar(max)  NULL,
     [Phone_Work] nvarchar(max)  NULL,
     [Phone_Mobile] nvarchar(max)  NULL,
@@ -223,8 +217,8 @@ CREATE TABLE [dbo].[Contacts] (
     [Social_Email] nvarchar(max)  NOT NULL,
     [Social_Facebook] nvarchar(max)  NULL,
     [Social_Twitter] nvarchar(max)  NULL,
-    [Address2_Street] nvarchar(max)  NULL,
-    [Address2_City] nvarchar(max)  NULL
+    [Address2_Street] nvarchar(255)  NULL,
+    [Address2_City] nvarchar(100)  NULL
 );
 GO
 
@@ -268,6 +262,13 @@ GO
 CREATE TABLE [dbo].[Users_Patient] (
     [Number] nvarchar(max)  NOT NULL,
     [ContactId] int  NOT NULL,
+    [Profile_FirstName] nvarchar(max)  NOT NULL,
+    [Profile_LastName] nvarchar(max)  NOT NULL,
+    [Profile_MiddleName] nvarchar(max)  NULL,
+    [Profile_Sex] int  NOT NULL,
+    [Profile_DOB] datetime  NULL,
+    [Profile_SSN] nvarchar(max)  NOT NULL,
+    [Profile_License] nvarchar(max)  NULL,
     [Id] int  NOT NULL
 );
 GO
@@ -294,6 +295,13 @@ GO
 
 -- Creating table 'Users_Agent'
 CREATE TABLE [dbo].[Users_Agent] (
+    [Profile_FirstName] nvarchar(max)  NOT NULL,
+    [Profile_LastName] nvarchar(max)  NOT NULL,
+    [Profile_MiddleName] nvarchar(max)  NULL,
+    [Profile_Sex] int  NOT NULL,
+    [Profile_DOB] datetime  NULL,
+    [Profile_SSN] nvarchar(max)  NOT NULL,
+    [Profile_License] nvarchar(max)  NULL,
     [Id] int  NOT NULL
 );
 GO

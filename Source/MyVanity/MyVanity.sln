@@ -18,6 +18,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Domain", "MyVanity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Services", "MyVanity.Services\MyVanity.Services.csproj", "{5D54601B-32FD-4215-B5B2-BBE4B770A59D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Views", "MyVanity.Views\MyVanity.Views.csproj", "{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{CE8ACA56-6ADB-4956-AF90-3A2F06F095B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Common", "MyVanity.Common\MyVanity.Common.csproj", "{D91D1192-306B-49F3-912F-32888BD2CC01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{A66CD88F-C572-4375-A4FD-B3DD2EB28701}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{24B8775C-A351-481E-95B7-47B5A46335E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A536C5EC-8625-448E-9C11-9F3E6E633F36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,9 +63,32 @@ Global
 		{5D54601B-32FD-4215-B5B2-BBE4B770A59D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D54601B-32FD-4215-B5B2-BBE4B770A59D}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{5D54601B-32FD-4215-B5B2-BBE4B770A59D}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{D91D1192-306B-49F3-912F-32888BD2CC01}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D91D1192-306B-49F3-912F-32888BD2CC01} = {CE8ACA56-6ADB-4956-AF90-3A2F06F095B2}
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C} = {A66CD88F-C572-4375-A4FD-B3DD2EB28701}
+		{16D0B619-7DB8-4840-8D18-4FFAC8B612D3} = {C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}
+		{5D54601B-32FD-4215-B5B2-BBE4B770A59D} = {C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}
+		{8B911593-3C8A-4650-875D-A609049B6BB9} = {24B8775C-A351-481E-95B7-47B5A46335E1}
+		{D85783D9-5586-4C38-93CE-F31BFB786A1A} = {A536C5EC-8625-448E-9C11-9F3E6E633F36}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.1\lib\NET45
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.1\lib\NET45

@@ -14,5 +14,12 @@ namespace MyVanity.Domain
     
     public partial class Agent : User
     {
+        public Agent()
+        {
+            this.Profile = new Person();
+        }
+    
+    
+        public Person Profile { get; set; }
     }
 }

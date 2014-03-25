@@ -12,12 +12,12 @@ namespace MyVanity.Web
     {
         protected void Application_Start()
         {
+            AutofacConfig.Register();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            AppInitializer.CreateAdminRole();
             AppInitializer.CreateAdminUser();
         }
     }
