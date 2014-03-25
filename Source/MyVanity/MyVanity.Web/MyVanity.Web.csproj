@@ -208,6 +208,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\ViewPage.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>

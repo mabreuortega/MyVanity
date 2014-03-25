@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MyVanity.Common.Localization;
 
 namespace MyVanity.Web.Models
 {
