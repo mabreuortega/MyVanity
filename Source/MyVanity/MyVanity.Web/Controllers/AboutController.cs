@@ -32,7 +32,7 @@ namespace MyVanity.Web.Controllers
             {
                 using (var reader = new BinaryReader(file.InputStream))
                 {
-                    await _blobStore.SaveAsync("files", Guid.NewGuid().ToString(), reader.ReadBytes(file.ContentLength));
+                    await _blobStore.SaveAsync("files", string.Format("file-{0}", Guid.NewGuid()), reader.ReadBytes(file.ContentLength));
                 }
             }
 
