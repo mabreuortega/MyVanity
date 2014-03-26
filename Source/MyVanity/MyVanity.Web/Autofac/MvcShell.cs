@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Integration.Mvc;
+using Microsoft.WindowsAzure.Storage;
 using MyVanity.Common.Autofac;
 
 namespace MyVanity.Web.Autofac
@@ -32,6 +34,10 @@ namespace MyVanity.Web.Autofac
 
             builder.RegisterModule<AutofacWebTypesModule>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
+
+            builder
+                .Register(c => CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccount"].ConnectionString))
+                .InstancePerHttpRequest();
         }
 
         public void Register()

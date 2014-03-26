@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -29,48 +30,52 @@ namespace MyVanity.Services.Blobs
 
         public Task<byte[]> FindAsync(string container, string path)
         {
-            var containerReference = _client.GetContainerReference(container);
-            var blobReference = containerReference.GetBlockBlobReference(path);
+            return
+                GetContainerReferenceAsync(container)
+                    .ContinueWith(
+                        t =>
+                        {
+                            var blobReference = t.Result.GetBlockBlobReference(path);
+                            if (!blobReference.Exists())
+                                return null;
 
-            return _readPolicy.ExecuteAsync(
-                () =>
-                {
-                    if (!blobReference.Exists())
-                        return null;
-
-
-                    var memory = new MemoryStream();
-                    return 
-                        blobReference.DownloadToStreamAsync(memory)
-                            .ContinueWith(
-                                t =>
-                                {
-                                    var result = memory.ToArray();
-                                    memory.Dispose();
-                                    return result;
-                                });
-                });
+                            using (var memory = new MemoryStream())
+                            {
+                                _readPolicy.ExecuteAction(() => blobReference.DownloadToStream(memory));
+                                return memory.ToArray();
+                            }
+                        });
         }
 
         public Task SaveAsync(string container, string path, byte[] blob)
         {
-            var containerReference = _client.GetContainerReference(container);
-            var blobReference = containerReference.GetBlockBlobReference(path);
-
-            return _writePolicy.ExecuteAction(
-                () =>
-                {
-                    return blobReference.UploadFromByteArrayAsync(blob, 0, blob.Length);
-                });
+            return
+                GetContainerReferenceAsync(container)
+                    .ContinueWith(
+                        t =>
+                        {
+                            var blobReference = t.Result.GetBlockBlobReference(path);
+                            _writePolicy.ExecuteAction(() => blobReference.UploadFromByteArray(blob, 0, blob.Length));
+                        });
         }
 
-        public Task DeleteAsync(string container, string name)
+        private async Task<CloudBlobContainer> GetContainerReferenceAsync(string container)
         {
             var containerReference = _client.GetContainerReference(container);
-            var blobReference = containerReference.GetBlockBlobReference(name);
+            await containerReference.CreateIfNotExistsAsync();
+            return containerReference;
+        }
 
-            return _writePolicy.ExecuteAction(
-                () => blobReference.DeleteIfExistsAsync());
+        public Task DeleteAsync(string container, string path)
+        {
+            return
+                GetContainerReferenceAsync(container)
+                    .ContinueWith(
+                        t =>
+                        {
+                            var blobReference = t.Result.GetBlockBlobReference(path);
+                            _writePolicy.ExecuteAction(() => blobReference.DeleteIfExists());
+                        });
         }
     }
 }

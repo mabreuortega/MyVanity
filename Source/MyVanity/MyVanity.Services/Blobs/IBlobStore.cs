@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyVanity.Common.Autofac;
 
 namespace MyVanity.Services.Blobs
 {
-    public interface IBlobStore
+    public interface IBlobStore : IPerRequestDependency
     {
         Task<byte[]> FindAsync(string container, string path);
 
