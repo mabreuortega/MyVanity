@@ -1,44 +1,178 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="danielconde">
 
+    <title>Home</title>
+
+    <!--[if lt IE 9]>
+        @Scripts.Render("~/bundles/js/ie8support")
+    <![endif]-->
+    
+    <!--[if lt IE 8]>
+	    @Styles.Render("~/bundles/css/ie7support")
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+        @Styles.Render("~/bundles/css/core")
+        @RenderSection("styles", false)
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <body>
+        <!-- Header
+            =======================-->
+        <div class="navbar navbar-default navbar-static-top header" role="navigation">
+          <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="#"><img src="content/images/ic-header-logo.png"/>VANITY PATIENT CARE</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            <div class="navbar-collapse collapse" style="height: 1px;">
+              <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li class="nav-divider"></li>
+                  <li><a href="#about">About</a></li>
+                  <li class="nav-divider"></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", false)
-</body>
+        <!--/.Header-->
+        
+        <!-- Main body
+            =========================-->
+        <div class="container mainBody">
+            
+            <!-- Body header-->
+            <div class="row second-header">
+                <div class="col-xs-12 col-sm-9 first-col">
+                    <div class="col-wrapper">
+                        <img class="img-circle img-responsive" src="content/images/sample-img-3.png" />
+                        <div class="info">
+                            <h3>MARIA LOPEZ</h3>
+                            <p ><span class="pink">32 days</span> until a more beautiful you...</p>
+                            <p class="visible-xs"><span class="pink">06-22-2014</span> PROCEDURE  DATE</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-1 second-col hidden-xs">
+                    <div class="col-wrapper center-block">
+                        <img src="content/images/ic-female.png"/>
+                        <p>FEMALE</p>    
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-2 third-col hidden-xs">
+                    <div class="col-wrapper">
+                        <p class="text-center">PROCEDURE<br/><br/>
+                            <span class="pink">06-22-2014</span><br/><br/>
+                            DATE</p>
+                    </div>
+                </div>
+            </div><!-- /.Body header-->
+                
+            <div class="row row-offcanvas row-offcanvas-left">
+                <!--Sidebar-->
+                <div class="sidebar sidebar-offcanvas col-xs-6 col-sm-3 hidden-xs" id="sidebar" role="navigation">
+                    <ul class="nav nav-stacked">
+                        <li><a href="Data"><span class="glyphicon glyphicon-th"></span><span>DATA</span></a> </li>
+                        <li><a href="Appointments"><span class="glyphicon glyphicon-calendar"></span><span>APPOINTMENTS</span></a> </li>
+                        <li class="active"><a href="Contact"><span class="glyphicon glyphicon-envelope"></span><span>CONTACT</span></a></li>
+                        <li><a href="Resources"><span class="glyphicon glyphicon-plus"></span><span>RESOURCES</span></a></li>
+                        <li><a href="Consent"><span class="glyphicon glyphicon-list-alt"></span><span>CONSENT</span></a></li>
+                    </ul>
+        
+                    <div class="contact-box">
+                        <div class="box1">
+                            <h5 class="pink">YOUR PATIENT COORDINATOR</h5>
+                            <img src="content/images/sample-img-4.png" class="img-responsive"/>    
+                            <h5 class="description">
+                                <small>Short Bio: Short two sentence description about patience coordinator</small>
+                            </h5>
+                        </div>
+                        <div class="box2">
+                            <div class="box2-header">
+                                <span class="glyphicon glyphicon-envelope pink"></span><span class="pink">SEND PRISCILLA A MESSAGE</span>
+                            </div>
+                            <form role="form">
+                                <textarea class="form-control" rows="3">
+                                    </textarea>
+                                <input type="submit" value="SUBMIT" class="btn btn-submit btn-xs pull-right"/>
+                            </form>
+                            <div class="clearfix"></div>
+                            <h5 class="description"><small>Our office hours are M-F 9AM-6PM. Please allow 24 hours for a reply</small></h5>
+                        </div>
+                    </div>
+                </div><!--/.Sidebar -->
+                <!--Template wrapper -->
+                <div class="col-xs-12 col-sm-9 template-col">
+                    <div class="row template-row">
+                        <div class="col-xs-12 template">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div><!--/.Template wrapper -->
+            </div>
+            <div class="visible-xs bottom-navigation">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="col-wrapper">
+                            <a href="Data"><span class="glyphicon glyphicon-th" ></span><br />DATA</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-wrapper">
+                            <a href="Appointments"><span class="glyphicon glyphicon-calendar"></span><br />APPOINTMENTS</a>    
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 active">
+                        <div class="col-wrapper">
+                            <a href="Resources"><span class="glyphicon glyphicon-plus" ></span><br />RESOURCES</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-wrapper">
+                            <a href="Consent"><span class="glyphicon glyphicon-list-alt" ></span><br />CONSENT</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-wrapper">
+                            <a href="contact"><span class="glyphicon glyphicon-envelope" ></span><br />CONTACT</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-box visible-xs">
+                    <div class="box1">
+                        <img src="content/images/sample-img-4.png" class="img-responsive"/>    
+                        <span class="text-muted">YOUR COORDINATOR <br /><span class="pink">PRISCILLA</span></span>
+                    </div>
+                    <form role="form">
+                        <textarea class="form-control" rows="3">
+                        </textarea>
+                        <input type="submit" value="SEND" class="btn btn-submit btn-xs pull-right"/>
+                    </form>
+                </div>
+            </div>
+        </div><!--/.Main body -->  
+        <!--Footer 
+            =============-->
+        <div class="footer container">
+            <p>"YOUR NEVER TO OLD TO SET A NEW GOAL OR TO DREAM A NEW DREAM"</p>    
+        </div><!--/.Footer--> 
+        
+        @Scripts.Render("~/bundles/js/core")
+        @RenderSection("scripts",false)
+    </body>
 </html>

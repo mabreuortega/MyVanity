@@ -1,0 +1,141 @@
+﻿/* DATA TEMPLATE */
+.data-template  .desc {
+    text-align: left;
+    padding-top: 28px;
+    padding-bottom: 10px;
+    font-size: .9em;
+    clear: both;
+}
+
+.data-template  .box1 dl dd {
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+.data-template  .box1 dl dt {
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 120px;
+}
+
+/* APPOINTMENTS TEMPLATE */
+.appointments-template ul.content-list-1 li span.pink {
+    margin-right: 5px;
+}
+
+/* CONTACT TEMPLATE */
+.contact-template .content-box {
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+.contact-template .coordinator-box img {
+    float: left;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.contact-template .coordinator-box p {
+    font-size: 0.9em;
+    display: table-cell;
+    padding-left: 2px;
+}
+
+.contact-template ul.content-list-1 li span.pink {
+    margin-right: 5px;
+}
+
+/* RESOURCES TEMPLATE */
+.resources-template ul.articles-list {
+    padding-top: 30px; 
+    clear: both;
+}
+
+.resources-template ul.articles-list li {
+    border: none;
+}
+
+.resources-template ul.articles-list > li > span.glyphicon {
+    vertical-align: middle;
+    margin-right: 20px;
+    font-size: 2em;
+    color: #cb0266;
+}
+
+.resources-template .row {
+    clear: both;
+    padding-top: 30px;
+}
+
+.resources-template .thumb_wrapper {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid rgb(152, 152, 152);
+    padding: 3px 3px;
+}
+
+.resources-template .thumb_wrapper .button {
+    position: absolute;
+    bottom: 28px;
+    left: 64px;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    padding: 12px 0;
+    line-height: 1.42;
+    border-radius: 22px;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+    background-color: #fb6699;
+    behavior: url(/content/css/PIE.htc)
+}
+
+.resources-template .thumb_wrapper .button .glyphicon {
+    color: white;
+    font-size: 1.2em;
+}
+/* CONSENT TEMPLATE */
+.consent-template .tab-pane {
+    padding: 4em 4em;
+    background-color: #f4f2f3;
+}
+
+.consent-template .tab-content {
+    border: 1px solid #ddd;
+    border-top: none;
+    margin-bottom: 15px;
+}
+
+.consent-template .nav {
+    clear: both;
+}
+
+.consent-template .nav-tabs > li.active > a {
+    background-color: #f4f2f3;
+}
+
+.consent-template .nav-tabs > li> a, .consent-template .nav-tabs > li.active > a {
+    color: #D12695;
+}
+
+.consent-template .consent-form {
+    padding: 4px 10px;
+    background-color: white;
+    text-align: left;
+    border: 2px solid #ddd;
+    
+}
+
+.consent-template .consent-form h5 {
+    text-align: center;
+}
+
+/* CUSTOM BREAKPOINTS STYLING */
+@media screen and (max-width: 767px) {
+    .consent-template .tab-pane {
+        padding: 1em 1em;
+        background-color: #f4f2f3;
+    }
+}

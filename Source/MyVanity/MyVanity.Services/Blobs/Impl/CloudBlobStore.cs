@@ -1,8 +1,7 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
+/*using System.Threading.Tasks;
 using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -78,4 +77,4 @@ namespace MyVanity.Services.Blobs
                         });
         }
     }
-}
+}*/
